@@ -9,7 +9,7 @@ class RenderManager():
         self.ascii_view = ascii_view
         self.mode = mode
         self.resolution = resolution
-        self.renderers = dict(dotted=RenderDotted(self.dotted_view, self.mesh), ascii=RenderAscii(self.ascii_view, self.mesh))
+        self.renderers = dict(dotted=RenderDotted(self.dotted_view, self.mesh, self.resolution), ascii=RenderAscii(self.ascii_view, self.mesh, self.resolution))
         self.current_renderer = self.renderers['dotted']
         
     def change_mode(self):
