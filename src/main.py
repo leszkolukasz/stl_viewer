@@ -58,7 +58,7 @@ class App:
         
     def open_file(self):
         #path = tk.filedialog.askopenfilename()
-        path = '/home/whistleroosh/Desktop/cube.stl'
+        path = './cube.stl'
         print(self.dotted_view.winfo_width())
         if len(path):
             self.mesh.load_file(path)
