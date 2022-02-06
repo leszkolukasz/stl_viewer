@@ -10,14 +10,20 @@ class App:
         self.root = tk.Tk()
         self.root.title("STL Viewer")
         self.root.geometry("600x600")
+        self.window_width = 600
+        self.window_height = 600
         
         self.mesh = Mesh()
         self.mode = tk.StringVar(value="dotted")
         self.resolution = tk.IntVar(value=10)
         
+        self.zoom = tk.IntVar(value=100)
+        
         self._build_ui_frames()
-        self.render_manager = RenderManager(self.root, self.mesh, self.dotted_view, self.dotted_view, self.mode, self.resolution)
+        self.render_manager = RenderManager(self.root, self.mesh, self.dotted_view, self.dotted_view, self.mode, self.resolution, self.zoom)
         self._build_ui_widgets()
+        
+        self.root.bind('<Configure> ', lambda e: self.resize(e))
         
     def run(self):
         self.root.mainloop()
@@ -54,15 +60,26 @@ class App:
         tk.Radiobutton(self.nav_frame, text='Dotted', value='dotted', variable=self.mode, command=self.render_manager.change_mode).grid(row=0, column=2, sticky='nswe')
         tk.Radiobutton(self.nav_frame, text='ASCII', value='ascii', variable=self.mode, command=self.render_manager.change_mode).grid(row=0, column=3, sticky='nswe')
         tk.Label(self.nav_frame, text="Resolution: ").grid(row=0, column=4, sticky='nswe')
-        tk.Scale(self.nav_frame, orient=tk.HORIZONTAL, length=200, from_=1.0, to=100.0, variable=self.resolution, command=self.render_manager.change_resolution).grid(row=0, column=5, sticky='nswe')
+        tk.Scale(self.nav_frame, orient=tk.HORIZONTAL, length=200, from_=1.0, to=50.0, variable=self.resolution, command=self.render_manager.change_resolution).grid(row=0, column=5, sticky='nswe')
+        
+        self.dotted_view.bind('<Button-4> ', self.render_manager.zoom_out)
+        self.dotted_view.bind('<Button-5> ', self.render_manager.zoom_in)
+        self.dotted_view.bind('<B1-Motion> ', self.render_manager.drag_mouse)
+        self.dotted_view.bind('<Shift-B1-Motion> ', self.render_manager.rotation_drag)
         
     def open_file(self):
         #path = tk.filedialog.askopenfilename()
-        path = './cube.stl'
+        path = './sphere.stl'
         print(self.dotted_view.winfo_width())
         if len(path):
             self.mesh.load_file(path)
             self.render_manager.render()
+            
+    def resize(self, event):
+        if event.widget == self.root:
+            if (self.window_width != event.width) and (self.window_height != event.height):
+                self.window_width, self.window_height = event.width, event.height
+                self.render_manager.render()
 
 if __name__ == '__main__':
     app = App()
