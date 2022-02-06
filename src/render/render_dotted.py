@@ -60,22 +60,22 @@ class RenderDotted(Render):
             c = get_projection(points[i, 6:9], z, Z, self.zoom, self.window.winfo_width(), self.window.winfo_height(), self.move_x, self.move_y)
             normal_val = (np.array(normals[i])/np.linalg.norm(normals[i])) @ (np.array([0, 1, -1])/math.sqrt(2))
             
-            """if normal_val < 0:
-                continue"""
+            if normal_val < 0:
+                continue
             
             normal_val = int(normal_val*255)
                 
             for projection in get_line(a, b, self.resolution):
                 if projection[0] >= 0 and projection[1] >= 0 and projection[0] <= self.window.winfo_width() and projection[1] <= self.window.winfo_height():
-                    self.window.create_oval(projection[0]-2, projection[1]-2, projection[0]+2, projection[1]+2, fill='white')
+                    self.window.create_oval(projection[0]-2, projection[1]-2, projection[0]+2, projection[1]+2, fill=rgb_hack((normal_val, normal_val, normal_val)))
                     
             for projection in get_line(a, c, self.resolution):
                 if projection[0] >= 0 and projection[1] >= 0 and projection[0] <= self.window.winfo_width() and projection[1] <= self.window.winfo_height():
-                    self.window.create_oval(projection[0]-2, projection[1]-2, projection[0]+2, projection[1]+2, fill='white')
+                    self.window.create_oval(projection[0]-2, projection[1]-2, projection[0]+2, projection[1]+2, fill=rgb_hack((normal_val, normal_val, normal_val)))
                     
             for projection in get_line(b, c,self.resolution):
                 if projection[0] >= 0 and projection[1] >= 0 and projection[0] <= self.window.winfo_width() and projection[1] <= self.window.winfo_height():
-                    self.window.create_oval(projection[0]-2, projection[1]-2, projection[0]+2, projection[1]+2, fill='white')
+                    self.window.create_oval(projection[0]-2, projection[1]-2, projection[0]+2, projection[1]+2, fill=rgb_hack((normal_val, normal_val, normal_val)))
             
             
         

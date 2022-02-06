@@ -17,7 +17,7 @@ class App:
         self.mode = tk.StringVar(value="dotted")
         self.resolution = tk.IntVar(value=10)
         
-        self.zoom = tk.IntVar(value=100)
+        self.zoom = tk.IntVar(value=10000)
         
         self._build_ui_frames()
         self.render_manager = RenderManager(self.root, self.mesh, self.dotted_view, self.dotted_view, self.mode, self.resolution, self.zoom)
