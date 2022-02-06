@@ -10,12 +10,8 @@ class Mesh():
         
     def load_file(self, path):
         self.mesh = stl.mesh.Mesh.from_file(path)
-        print(self.mesh)
         
-    def get_points(self):
-        if self.points is not None:
-            return self.points
-        
+    def get_points(self, x, y):      
         """self.points = np.zeros((3*len(self.mesh.points), 3))
         for i in range(len(self.mesh.points)):
             self.points[i, 0] = np.sum(self.mesh.points[i, ::3])
@@ -25,9 +21,12 @@ class Mesh():
             self.points[3*i] = self.mesh.points[i, 0:3]
             self.points[3*i+1] = self.mesh.points[i, 3:6]
             self.points[3*i+2] = self.mesh.points[i, 6:9]"""
-        self.points = self.mesh.points
+        if x != 0:
+            self.mesh.rotate([0, 1, 0], -x/100)
+        if y != 0:
+            self.mesh.rotate([1, 0, 0], -y/100)
 
-        return self.points
+        return self.mesh.points
     
     def get_normals(self):
         return self.mesh.get_unit_normals()
