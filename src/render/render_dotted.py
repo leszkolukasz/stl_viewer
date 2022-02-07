@@ -39,5 +39,7 @@ class RenderDotted(Render):
                             projection[0]-2,
                             projection[1]-2,
                             projection[0]+2,
-                            projection[1]+2, fill=self.rgb_to_hex((normal, normal, normal)))
+                            projection[1]+2,
+                            fill=self.rgb_to_hex((normal, normal, normal))
+                        )
         
