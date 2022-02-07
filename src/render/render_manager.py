@@ -3,9 +3,10 @@ from render.render_dotted import RenderDotted
 import tkinter as tk
 
 class RenderManager():
-    def __init__(self, root, mesh, dotted_view, ascii_view, config):
+    def __init__(self, root, mesh, render_frame, dotted_view, ascii_view, config):
         self.root = root
         self.mesh = mesh
+        self.render_frame = render_frame
         self.dotted_view = dotted_view
         self.ascii_view = ascii_view
         
@@ -28,27 +29,28 @@ class RenderManager():
             ascii=RenderAscii(
                 self.ascii_view,
                 self.mesh,
+                self.render_frame,
                 self.config
             )
         )
         self.current_renderer = self.renderers['dotted']
         
     def change_mode(self):        
-        if self.mode.get() == 'dotted':
+        if self.config['mode'].get() == 'dotted':
             self.ascii_view.grid_forget()
             self.dotted_view.grid(row=0, column=0, sticky='nswe')
             self.dotted_view.create_rectangle(
                 0, 0, self.dotted_view.winfo_width(), self.dotted_view.winfo_height(), fill='black'
             )
 
-        if self.mode.get() == 'ascii':
+        if self.config['mode'].get() == 'ascii':
             self.dotted_view.grid_forget()
             self.ascii_view.grid(row=0, column=0, sticky='nswe')
+            self.root.update()
             self.ascii_view.create_rectangle(
                 0, 0, self.ascii_view.winfo_width(), self.ascii_view.winfo_height(), fill='white'
             )
-
-            
+   
         self.current_renderer = self.renderers[self.config['mode'].get()]
         self.render()
         
@@ -66,23 +68,23 @@ class RenderManager():
             self.render()
         self.delta['from_rotation'] = [0, 0]
         
-    def move(self, val):
+    def move(self, val, scale=1):
         if self.delta['from_move'] == [0, 0]:
             self.delta['from_move']  = [val.x, val.y]
-            self.root.after(50, self._move)
+            self.root.after(50, lambda: self._move(scale))
         else:
             self.delta['to_move']  = [val.x, val.y]
         
-    def _move(self):
+    def _move(self, scale):
         if self.delta['from_move'] != [0, 0]:
-            self.config['move_offset'][0] += self.delta['to_move'][0] - self.delta['from_move'][0]
-            self.config['move_offset'][1] += self.delta['to_move'][1] - self.delta['from_move'][1]
+            self.config['move_offset'][0] += int((self.delta['to_move'][0] - self.delta['from_move'][0])*scale)
+            self.config['move_offset'][1] += int((self.delta['to_move'][1] - self.delta['from_move'][1])*scale)
             self.render()
         self.delta['from_move'] = [0, 0]
         
     def change_resolution(self, val):
         self.delta['resolution'] = val
-        self.root.after(50, self._change_resolution)
+        self.root.after(100, self._change_resolution)
         
     def _change_resolution(self):
         if self.delta['resolution'] != 0:
@@ -91,7 +93,7 @@ class RenderManager():
         
     def zoom(self, val, change):
         self.delta['zoom'] += change
-        self.root.after(50, self._zoom)
+        self.root.after(100, self._zoom)
         
     def _zoom(self):
         if self.delta['zoom'] != 0:
