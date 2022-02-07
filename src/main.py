@@ -10,8 +10,6 @@ class App:
         self.root = tk.Tk()
         self.root.title("STL Viewer")
         self.root.geometry("600x600")
-        self.window_width = 600
-        self.window_height = 600
         
         self.mesh = Mesh()
         self.config = dict(
@@ -21,15 +19,18 @@ class App:
             fov=250,
             distance=300,
             move_offset=[0, 0],
-            rotation_offset=[0,0]
+            rotation_offset=[0,0],
+            window_width = 600,
+            window_height = 600
         )
         
         self._build_ui_frames()
         self.render_manager = RenderManager(
             self.root,
             self.mesh,
+            self.render_frame,
             self.dotted_view,
-            self.dotted_view,
+            self.ascii_view,
             self.config
         )
         self._build_ui_widgets()
@@ -53,7 +54,7 @@ class App:
         self.dotted_view = tk.Canvas(self.render_frame, background='black')
         self.dotted_view.grid(row=0, column=0, sticky='nswe')
         self.ascii_view = tk.Canvas(self.render_frame, background='white')
-
+        
         self.nav_frame = tk.Frame(self.root,  bg='green', padx=10)
         self.nav_frame.grid(row=20, column=0, sticky='nswe')
         
@@ -104,6 +105,11 @@ class App:
         self.dotted_view.bind('<B1-Motion> ', self.render_manager.move)
         self.dotted_view.bind('<Shift-B1-Motion> ', self.render_manager.rotate)
         
+        self.ascii_view.bind('<Button-4> ', lambda val: self.render_manager.zoom(val, -1))
+        self.ascii_view.bind('<Button-5> ', lambda val: self.render_manager.zoom(val, 1))
+        self.ascii_view.bind('<B1-Motion> ', lambda val: self.render_manager.move(val, 0.1))
+        self.ascii_view.bind('<Shift-B1-Motion> ', self.render_manager.rotate)
+        
     def open_file(self):
         #path = tk.filedialog.askopenfilename()
         path = './sphere.stl'
@@ -114,8 +120,8 @@ class App:
             
     def resize(self, event):
         if event.widget == self.root:
-            if (self.window_width != event.width) and (self.window_height != event.height):
-                self.window_width, self.window_height = event.width, event.height
+            if (self.config['window_width'] != event.width) and (self.config['window_height'] != event.height):
+                self.config['window_width'], self.config['window_height'] = event.width, event.height
                 self.render_manager.render()
 
 if __name__ == '__main__':
