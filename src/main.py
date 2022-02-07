@@ -14,13 +14,24 @@ class App:
         self.window_height = 600
         
         self.mesh = Mesh()
-        self.mode = tk.StringVar(value="dotted")
-        self.resolution = tk.IntVar(value=10)
-        
-        self.zoom = tk.IntVar(value=100)
+        self.config = dict(
+            mode=tk.StringVar(value="dotted"),
+            resolution=tk.IntVar(value=10),
+            zoom=100,
+            fov=250,
+            distance=300,
+            move_offset=[0, 0],
+            rotation_offset=[0,0]
+        )
         
         self._build_ui_frames()
-        self.render_manager = RenderManager(self.root, self.mesh, self.dotted_view, self.dotted_view, self.mode, self.resolution, self.zoom)
+        self.render_manager = RenderManager(
+            self.root,
+            self.mesh,
+            self.dotted_view,
+            self.dotted_view,
+            self.config
+        )
         self._build_ui_widgets()
         
         self.root.bind('<Configure> ', lambda e: self.resize(e))
@@ -55,17 +66,43 @@ class App:
         self.nav_frame.columnconfigure(5, weight=1)
 
     def _build_ui_widgets(self):
-        tk.Button(self.nav_frame, text="Open", command=self.open_file, pady=10).grid(row=0, column=0, sticky='nswe')
-        tk.Label(self.nav_frame, text="View mode: ").grid(row=0, column=1, sticky='nswe')
-        tk.Radiobutton(self.nav_frame, text='Dotted', value='dotted', variable=self.mode, command=self.render_manager.change_mode).grid(row=0, column=2, sticky='nswe')
-        tk.Radiobutton(self.nav_frame, text='ASCII', value='ascii', variable=self.mode, command=self.render_manager.change_mode).grid(row=0, column=3, sticky='nswe')
-        tk.Label(self.nav_frame, text="Resolution: ").grid(row=0, column=4, sticky='nswe')
-        tk.Scale(self.nav_frame, orient=tk.HORIZONTAL, length=200, from_=1.0, to=50.0, variable=self.resolution, command=self.render_manager.change_resolution).grid(row=0, column=5, sticky='nswe')
+        tk.Button(
+            self.nav_frame, text="Open", command=self.open_file, pady=10
+        ).grid(row=0, column=0, sticky='nswe')
+        tk.Label(
+            self.nav_frame, text="View mode: "
+        ).grid(row=0, column=1, sticky='nswe')
+        tk.Radiobutton(
+            self.nav_frame,
+            text='Dotted',
+            value='dotted',
+            variable=self.config['mode'],
+            command=self.render_manager.change_mode
+        ).grid(row=0, column=2, sticky='nswe')
+        tk.Radiobutton(
+            self.nav_frame,
+            text='ASCII',
+            value='ascii',
+            variable=self.config['mode'],
+            command=self.render_manager.change_mode
+        ).grid(row=0, column=3, sticky='nswe')
+        tk.Label(
+            self.nav_frame, text="Resolution: "
+        ).grid(row=0, column=4, sticky='nswe')
+        tk.Scale(
+            self.nav_frame,
+            orient=tk.HORIZONTAL,
+            length=200,
+            from_=1.0,
+            to=30.0,
+            variable=self.config['resolution'],
+            command=self.render_manager.change_resolution
+        ).grid(row=0, column=5, sticky='nswe')
         
-        self.dotted_view.bind('<Button-4> ', self.render_manager.zoom_out)
-        self.dotted_view.bind('<Button-5> ', self.render_manager.zoom_in)
-        self.dotted_view.bind('<B1-Motion> ', self.render_manager.drag_mouse)
-        self.dotted_view.bind('<Shift-B1-Motion> ', self.render_manager.rotation_drag)
+        self.dotted_view.bind('<Button-4> ', lambda val: self.render_manager.zoom(val, -1))
+        self.dotted_view.bind('<Button-5> ', lambda val: self.render_manager.zoom(val, 1))
+        self.dotted_view.bind('<B1-Motion> ', self.render_manager.move)
+        self.dotted_view.bind('<Shift-B1-Motion> ', self.render_manager.rotate)
         
     def open_file(self):
         #path = tk.filedialog.askopenfilename()
