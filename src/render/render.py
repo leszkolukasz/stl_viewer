@@ -1,8 +1,21 @@
+"""Defines Render class that is responsible for rendering in different styles"""
+
 import math
 import numpy as np
+
 from abc import ABC, abstractmethod
 
 class Render(ABC):
+    """
+    Variables
+    ----------
+    window:
+        reference to canvas
+    mesh: Mesh
+        reference to Mesh object
+    config: Dict[str]
+        various configuration parameters
+    """
     @abstractmethod
     def __init__(self, window, mesh, config):
         pass
@@ -15,11 +28,13 @@ class Render(ABC):
         return "#%02x%02x%02x" % rgb 
 
     def get_projection(self, point, width, height, scale=1):
+        """Returns projection of 3d point onto screen"""
         x = int((width/2 + scale*((point[0])*self.config['fov']*self.config['zoom']/(point[2] + self.config['distance'])) + self.config['move_offset'][0]))
         y = int(height/2 - ((point[1])*self.config['fov']*self.config['zoom']/(point[2] + self.config['distance'])) + self.config['move_offset'][1])
         return (x, y)
 
     def get_line(self, p1, p2, full=False):
+        """Returns points on line p1->p2"""
         scale = 1 if full else self.config['resolution'].get()/100
         if p1[0] == p2[0] and p1[1] == p2[1]:
             yield p1

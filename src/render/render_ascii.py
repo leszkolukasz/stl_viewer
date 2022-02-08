@@ -1,5 +1,8 @@
+"""Implements ASCII renderer"""
+
 import math
 import numpy as np
+
 from render.render import Render
 
 class RenderAscii(Render):
@@ -11,21 +14,9 @@ class RenderAscii(Render):
     
     def render(self):
         self.config['zoom'] /= 20
-        self.font_size = self.config['resolution']
-        self.output = np.full((int(1.5*self.window.winfo_width()/self.font_size.get()), int(self.window.winfo_height()//self.font_size.get())), 32)
+        self.font_size = self.config['resolution'].get()
+        self.output = np.full((int(1.5*self.window.winfo_width()/self.font_size), int(self.window.winfo_height()//self.font_size)), 32)
         
-        """
-        print(self.window.winfo_width())
-        txt = ""
-        print(self.output.shape)
-        for i in range(self.output.shape[1]):
-            for j in range(self.output.shape[0]):
-                txt += '#'
-            txt += '\n'
-        self.window.create_rectangle(0, 0, self.window.winfo_width(), self.window.winfo_height(), fill='black')
-        self.window.create_text(int(self.window.winfo_width()/2), int(self.window.winfo_height()/2), text=txt, font=('Courier', self.font_size.get()), fill='white')
-        
-        """
         points = self.mesh.get_points(
             self.config['rotation_offset'][0], self.config['rotation_offset'][1]
         )
@@ -60,6 +51,6 @@ class RenderAscii(Render):
                 txt += chr(self.output[j, i])
             txt += '\n'
         print(self.output.shape)
-        self.window.create_text(int(self.window.winfo_width()/2), int(self.window.winfo_height()/2), text=txt, font=('Courier', self.font_size.get()), fill='white')
+        self.window.create_text(int(self.window.winfo_width()/2), int(self.window.winfo_height()/2), text=txt, font=('Courier', self.font_size), fill='white')
         self.config['zoom'] *= 20
         

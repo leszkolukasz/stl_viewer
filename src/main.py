@@ -1,3 +1,5 @@
+"""Implements Main application class"""
+
 import tkinter as tk
 import tkinter.filedialog
 
@@ -5,7 +7,28 @@ from render.render_manager import RenderManager
 from mesh import Mesh
 
 class App:
+    """
+    Main application class. Manages all Tkinter widgets
     
+    Variables
+    ----------
+    root:
+        main application Tkinter class
+    mesh: Mesh
+        object that contains vectors from stl file and applies transformations to it
+    config: Dict[str]
+        various configuration parameters
+    render_manager: RenderManager
+        object that manages rendering
+    render_frame:
+        frame where renderin occurs
+    nav_frame:
+        frame with navigation buttos
+    dotted_view:
+        canvas where dotted view is displayed
+    ascii_view:
+        canvas where ASCII view is displayed
+    """
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("STL Viewer")
@@ -111,9 +134,8 @@ class App:
         self.ascii_view.bind('<Shift-B1-Motion> ', self.render_manager.rotate)
         
     def open_file(self):
-        #path = tk.filedialog.askopenfilename()
-        path = './sphere.stl'
-        print(self.dotted_view.winfo_width())
+        path = tk.filedialog.askopenfilename()
+        #path = './sphere.stl'
         if len(path):
             self.mesh.load_file(path)
             self.render_manager.render()

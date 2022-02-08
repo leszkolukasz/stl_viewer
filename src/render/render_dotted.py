@@ -1,5 +1,8 @@
+"""Implements dotted renderer"""
+
 import math
 import numpy as np
+
 from render.render import Render
 
 class RenderDotted(Render):

@@ -3,6 +3,15 @@ from render.render_dotted import RenderDotted
 import tkinter as tk
 
 class RenderManager():
+    """
+    Variables
+    ---------
+    renderers: Dict[Render]
+        dictionary of all available renderers
+    delta: Dict[str]
+        various variables needed to deal with too frequent events
+    
+    """
     def __init__(self, root, mesh, render_frame, dotted_view, ascii_view, config):
         self.root = root
         self.mesh = mesh
