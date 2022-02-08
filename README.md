@@ -5,7 +5,7 @@ This app is a simple STL viewer that displays 3D objects contained in STL files.
 - dotted style - displays object's wireframe using evenly spaced dots
 - ASCII style (inspired by Andy Sloane's [idea](https://www.a1k0n.net/2011/07/20/donut-math.html)) - displays object's wireframe using ASCII characters
 
-In its functionality this app is quite similar to traditional STL viewers. Displayed object can be rotated, moved on the screen and zoomed in and out, all by using key shortcuts. STL files can be loaded using native file selector, and to increase FPS one can change the resolution (that is how many details to render) of the object.
+In its functionality this app is quite similar to traditional STL viewers. Displayed object can be rotated, moved on the screen and zoomed in and out by using key shortcuts. STL files can be loaded using native file selector, and to increase FPS one can change the resolution (that is how many details to render) of the object.
 
 ## Installation
 
@@ -16,18 +16,17 @@ pip install -r requirements.txt
 
 ## Usage
 
-To use the application run main.py.
+To start the application use run.sh script.
 
-Home screen has the following buttons:
-- "Know" - show the word with increased time delay
-- "Don't know" - show the word on the following day
-- "Don't show" - never show this word again
-- "Previous" - move to previous word
-- "Next" - move to next word
+To load STL file use "Open" button and select the desired file. Upon file loading, you can use the buttons at the bottom of the app to change render mode and resolution.
 
-Search screen allows you to look up arbitrary word from dictionary. If you click on the word, you can edit its level<sup>1</sup>
+Transformations to the object can be applies using the following key shorcuts:
 
-List screen shows all the words from dictionary grouped by its level. Moreover, you can view the words that you have learned during the day. Each word is clickable and allows you to edit its level.
+- Movement - Left click + Mouse move
+- Rotation - Shift + Left click + Mouse move
+- Zoom - Mouse scroll
+
+
 
 ## Images
 
