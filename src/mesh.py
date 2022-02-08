@@ -1,3 +1,5 @@
+"""Implements class that operates on vectors stored in stl file"""
+
 import numpy as np
 import stl
 
@@ -10,6 +12,9 @@ class Mesh():
         
     def load_file(self, path):
         self.mesh = stl.mesh.Mesh.from_file(path)
+        
+    def is_loaded(self):
+        return self.mesh is not None
         
     def get_points(self, rotate_x, rotate_y):
         if rotate_x != 0:

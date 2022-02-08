@@ -57,7 +57,7 @@ class RenderManager():
             self.ascii_view.grid(row=0, column=0, sticky='nswe')
             self.root.update()
             self.ascii_view.create_rectangle(
-                0, 0, self.ascii_view.winfo_width(), self.ascii_view.winfo_height(), fill='white'
+                0, 0, self.ascii_view.winfo_width(), self.ascii_view.winfo_height(), fill='black'
             )
    
         self.current_renderer = self.renderers[self.config['mode'].get()]
@@ -111,4 +111,7 @@ class RenderManager():
         self.delta['zoom'] = 0
         
     def render(self):
-        self.current_renderer.render()
+        if(self.mesh.is_loaded()):
+            self.current_renderer.render()
+        else:
+            print("No file selected")

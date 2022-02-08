@@ -15,7 +15,13 @@ class RenderAscii(Render):
     def render(self):
         self.config['zoom'] /= 20
         self.font_size = self.config['resolution'].get()
-        self.output = np.full((int(1.5*self.window.winfo_width()/self.font_size), int(self.window.winfo_height()//self.font_size)), 32)
+        self.output = np.full(
+            (
+                int(1.5*self.window.winfo_width()/self.font_size), 
+                int(self.window.winfo_height()//self.font_size)
+            ),
+            32
+        )
         
         points = self.mesh.get_points(
             self.config['rotation_offset'][0], self.config['rotation_offset'][1]
@@ -43,14 +49,21 @@ class RenderAscii(Render):
                         projection[0] < self.output.shape[0] and
                         projection[1] < self.output.shape[1]
                     ):
-                        self.output[int(projection[0]), int(projection[1])] = ord((list(".,-~:;=!*#$@"))[min(normal, 11)])
+                        self.output[int(projection[0]), int(projection[1])] = (
+                            ord((list(".,-~:;=!*#$@"))[min(normal, 11)])
+                        )
                         
         txt = ""
         for i in range(self.output.shape[1]):
             for j in range(self.output.shape[0]):
                 txt += chr(self.output[j, i])
             txt += '\n'
-        print(self.output.shape)
-        self.window.create_text(int(self.window.winfo_width()/2), int(self.window.winfo_height()/2), text=txt, font=('Courier', self.font_size), fill='white')
+            
+        self.window.create_text(
+            int(self.window.winfo_width()/2), int(self.window.winfo_height()/2),
+            text=txt,
+            font=('Courier', self.font_size),
+            fill='white'
+        )
         self.config['zoom'] *= 20
         
