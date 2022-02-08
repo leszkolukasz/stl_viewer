@@ -24,8 +24,8 @@ Transformations to the object can be applies using the following key shorcuts:
 
 - Movement - Left click + Mouse move
   <p float="left">
-    <img src="readme_filles/move_dotted.gif" width="400" />
-    <img src="readme_filles/move_ascii.gif" width="400" /> 
+    <img src="readme_filles/move_dotted.gif" width="350" />
+    <img src="readme_filles/move_ascii.gif" width="350" /> 
   </p>
 - Rotation - Shift + Left click + Mouse move
   <p float="left">
