@@ -43,8 +43,8 @@ Transformations to the object can be applies using the following key shorcuts:
 
 <p float="left">
   <img src="readme_filles/demo.gif" width="400" />
-  <img src="readme_filles/pikachu.gif"" width="400" /> 
+  <img src="readme_filles/pikachu.gif"" width="400" /> *
 </p>
 
 -------------------------------------------
-<sup>1</sup> Level of the words determines when it is to be shown in the app. It is a value in range [0 ,16]. 0 means that you haven't seen this word yet. 16 means that you know this word and it will never be shown again. "Know" button increments level value, while "Don't know" button sets it to 1. To see levels and corresponding time delays see constants.py
+<sup>*</sup> Pikachu model created by [flowalistik](https://www.thingiverse.com/flowalistik/designs)
