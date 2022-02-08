@@ -23,21 +23,28 @@ To load STL file use "Open" button and select the desired file. Upon file loadin
 Transformations to the object can be applies using the following key shorcuts:
 
 - Movement - Left click + Mouse move
+  <p float="left">
+    <img src="readme_filles/move_dotted.gif" width="400" />
+    <img src="readme_filles/move_ascii.gif" width="400" /> 
+  </p>
 - Rotation - Shift + Left click + Mouse move
+  <p float="left">
+    <img src="readme_filles/rotate_dotted.gif" width="400" />
+    <img src="readme_filles/rotate_ascii.gif" width="400" /> 
+  </p>
 - Zoom - Mouse scroll
+  <p float="left">
+    <img src="readme_filles/zoom_dotted.gif" width="400" />
+    <img src="readme_filles/zoom_ascii.gif" width="400" /> 
+  </p>
 
-
-
-## Images
+  
+## Gallery
 
 <p float="left">
-  <img src="images/main.png" width="400" />
-  <img src="images/search.png" width="400" /> 
-  <img src="images/list.png" width="400" />
-  <img src="images/edit.png" width="400" /> 
+  <img src="readme_filles/demo.gif" width="400" />
+  <img src="readme_filles/pikachu.gif"" width="400" /> 
 </p>
 
 -------------------------------------------
 <sup>1</sup> Level of the words determines when it is to be shown in the app. It is a value in range [0 ,16]. 0 means that you haven't seen this word yet. 16 means that you know this word and it will never be shown again. "Know" button increments level value, while "Don't know" button sets it to 1. To see levels and corresponding time delays see constants.py
-
-<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
