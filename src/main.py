@@ -68,7 +68,7 @@ class App:
         for i in range(21):
             self.root.rowconfigure(i, weight=1)
 
-        self.render_frame = tk.Frame(self.root, bg='red', padx=10, pady=10)
+        self.render_frame = tk.Frame(self.root, bg='black', padx=10, pady=10)
         self.render_frame.grid(row=0, column=0, rowspan=20, sticky='nswe')
         
         self.render_frame.rowconfigure(0, weight=1)
@@ -76,9 +76,9 @@ class App:
         
         self.dotted_view = tk.Canvas(self.render_frame, background='black')
         self.dotted_view.grid(row=0, column=0, sticky='nswe')
-        self.ascii_view = tk.Canvas(self.render_frame, background='white')
+        self.ascii_view = tk.Canvas(self.render_frame, background='black')
         
-        self.nav_frame = tk.Frame(self.root,  bg='green', padx=10)
+        self.nav_frame = tk.Frame(self.root,  bg='black', padx=10)
         self.nav_frame.grid(row=20, column=0, sticky='nswe')
         
         self.nav_frame.rowconfigure(0, weight=1)
