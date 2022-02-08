@@ -1,6 +1,6 @@
 # STL Viewer
 
-This app is a simple STL viewer that displays 3D objects contained in STL files. However, unlike other STL viewer, this app renders objects using two distinct styles:
+This app is a simple STL viewer that displays 3D objects contained in STL files. However, unlike other STL viewers, this app renders objects using two distinct styles:
 
 - dotted style - displays object's wireframe using evenly spaced dots
 - ASCII style (inspired by Andy Sloane's [idea](https://www.a1k0n.net/2011/07/20/donut-math.html)) - displays object's wireframe using ASCII characters
