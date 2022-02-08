@@ -20,7 +20,7 @@ To start the application use run.sh script.
 
 To load STL file use "Open" button and select the desired file. Upon file loading, you can use the buttons at the bottom of the app to change render mode and resolution.
 
-Transformations to the object can be applies using the following key shorcuts:
+Transformations to the object can be applied using the following key shorcuts:
 
 - Movement - Left click + Mouse move
   <p float="left">
