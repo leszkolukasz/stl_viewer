@@ -29,21 +29,21 @@ Transformations to the object can be applies using the following key shorcuts:
   </p>
 - Rotation - Shift + Left click + Mouse move
   <p float="left">
-    <img src="readme_filles/rotate_dotted.gif" width="400" />
-    <img src="readme_filles/rotate_ascii.gif" width="400" /> 
+    <img src="readme_filles/rotate_dotted.gif" width="350" />
+    <img src="readme_filles/rotate_ascii.gif" width="350" /> 
   </p>
 - Zoom - Mouse scroll
   <p float="left">
-    <img src="readme_filles/zoom_dotted.gif" width="400" />
-    <img src="readme_filles/zoom_ascii.gif" width="400" /> 
+    <img src="readme_filles/zoom_dotted.gif" width="350" />
+    <img src="readme_filles/zoom_ascii.gif" width="350" /> 
   </p>
 
   
 ## Gallery
 
 <p float="left">
-  <img src="readme_filles/demo.gif" width="400" />
-  <img src="readme_filles/pikachu.gif"" width="400" /> *
+  <img src="readme_filles/demo.gif" width="350" />
+  <img src="readme_filles/pikachu.gif"" width="350" /> *
 </p>
 
 -------------------------------------------
