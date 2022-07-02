@@ -21,9 +21,9 @@ class App:
     render_manager: RenderManager
         object that manages rendering
     render_frame:
-        frame where renderin occurs
+        frame where rendering occurs
     nav_frame:
-        frame with navigation buttos
+        frame with navigation buttons
     dotted_view:
         canvas where dotted view is displayed
     ascii_view:
