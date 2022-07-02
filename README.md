@@ -1,4 +1,6 @@
 # STL Viewer
+![license](https://img.shields.io/github/license/leszkolukasz/stl_viewer.svg)
+![status](https://img.shields.io/badge/status-finished-green)
 
 This app is a simple STL viewer that displays 3D objects contained in STL files. However, unlike other STL viewers, this app renders objects using two distinct styles:
 
