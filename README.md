@@ -16,6 +16,8 @@ Run the following command to install required modules:
 pip install -r requirements.txt
 ```
 
+Project was tested with python 3.10 and I don't guarantee that it will work with newer python releases.
+
 ## Usage
 
 To start the application use run.sh script.
